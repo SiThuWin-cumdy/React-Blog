@@ -2,23 +2,14 @@ import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialPosts = [
   {
-    id: "p1",
     title: "Welcome to the Dark Blog ✨",
-    author: "Admin",
-    createdAt: new Date().toISOString(),
-    excerpt: "A minimal starter with Tailwind v4 and TinyMCE.",
+    userId: "Admin",
+    slug: "A minimal starter with Tailwind v4 and TinyMCE.",
     content:
       "<p>This is a <strong>rich</strong> paragraph created with TinyMCE.</p>",
+    featureImage: ''
   },
-  {
-    id: "p2",
-    title: "Second Post: Tips & Tricks",
-    author: "SI THU WIN",
-    createdAt: new Date().toISOString(),
-    excerpt: "Pragmatic, production‑ready setup.",
-    content:
-      "<ul><li>Vite + React</li><li>Redux Toolkit</li><li>Tailwind v4</li></ul>",
-  },
+
 ];
 
 export const postsSlice = createSlice({
@@ -29,15 +20,18 @@ export const postsSlice = createSlice({
       reducer(state, action) {
         state.unshift(action.payload);
       },
-      prepare({ title, author, excerpt, content }) {
+      prepare({ title,
+        userId,
+        slug,
+        content,
+        featureImage, }) {
         return {
           payload: {
-            id: nanoid(),
             title,
-            author,
-            excerpt,
+            userId,
+            slug,
             content,
-            createdAt: new Date().toISOString(),
+            featureImage,
           },
         };
       },

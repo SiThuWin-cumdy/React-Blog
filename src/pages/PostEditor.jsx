@@ -2,22 +2,30 @@ import React, { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../features/postsSlice";
-import {Card} from "../components/index";
+import { Card } from "../components/index";
 import conf from '../conf/conf.js';
-
+import appwriteService from '../appwrite/config';
 function PostEditor() {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [excerpt, setExcerpt] = useState("");
+  const [slug, setSlug] = useState("");
   const [content, setContent] = useState("<p>Write something awesome…</p>");
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     if (!title.trim()) return;
-    dispatch(
-      addPost({ title, author: author || "Anonymous", excerpt, content })
-    );
+
+    const dbPost = await appwriteService.createPost({ title, slug, content,featuredImage: '', status: 'active', userId: '123' });
+
+    if (dbPost) {
+      dispatch(
+        addPost({ title, author: author || "Anonymous", excerpt, content })
+      );
+    }
+    console.log('post', { title, author: author || "Anonymous", excerpt, content })
+
     setTitle("");
     setAuthor("");
     setExcerpt("");
@@ -41,12 +49,21 @@ function PostEditor() {
             className="bg-surface/60 border border-white/10 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-brand-600/50"
           />
         </div>
-        <input
-          value={excerpt}
-          onChange={(e) => setExcerpt(e.target.value)}
-          placeholder="Short excerpt…"
-          className="w-full bg-surface/60 border border-white/10 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-brand-600/50"
-        /> 
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <input
+            value={slug}
+            onChange={(e) => setSlug(e.target.value)}
+            placeholder="Slug"
+            className="w-full bg-surface/60 border border-white/10 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-brand-600/50"
+          />
+          <input
+            value={excerpt}
+            onChange={(e) => setExcerpt(e.target.value)}
+            placeholder="Short excerpt…"
+            className="w-full bg-surface/60 border border-white/10 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-brand-600/50"
+          />
+        </div>
+
         <Editor
           apiKey={conf.tinymceAPI}
           init={{
@@ -96,7 +113,7 @@ function PostEditor() {
             height: 700,
             menubar: true,
             skin: "oxide-dark",
-            content_css: "dark", 
+            content_css: "dark",
             toolbar:
               "undo redo | blocks | bold italic underline | align | bullist numlist | link | removeformat | code",
             branding: false,
