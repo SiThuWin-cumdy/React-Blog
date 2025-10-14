@@ -1,14 +1,14 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialPosts = [
-  {
-    title: "Welcome to the Dark Blog ✨",
-    userId: "Admin",
-    slug: "A minimal starter with Tailwind v4 and TinyMCE.",
-    content:
-      "<p>This is a <strong>rich</strong> paragraph created with TinyMCE.</p>",
-    featureImage: ''
-  },
+  // {
+  //   title: "Welcome to the Dark Blog ✨",
+  //   userId: "Admin",
+  //   slug: "A minimal starter with Tailwind v4 and TinyMCE.",
+  //   content:
+  //     "<p>This is a <strong>rich</strong> paragraph created with TinyMCE.</p>",
+  //   featureImage: ''
+  // },
 
 ];
 

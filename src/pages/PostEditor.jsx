@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../features/postsSlice";
-import { Card } from "../components/index";
-import conf from '../conf/conf.js';
-import appwriteService from '../appwrite/config';
+import { Card ,Button} from "../components/index";
+import conf from "../conf/conf.js";
+import appwriteService from "../appwrite/config";
 function PostEditor() {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
@@ -12,19 +12,32 @@ function PostEditor() {
   const [excerpt, setExcerpt] = useState("");
   const [slug, setSlug] = useState("");
   const [content, setContent] = useState("<p>Write something awesome…</p>");
+  const auth = useSelector((state) => state.auth);
 
   const submit = async (e) => {
     e.preventDefault();
     if (!title.trim()) return;
 
-    const dbPost = await appwriteService.createPost({ title, slug, content,featuredImage: '', status: 'active', userId: '123' });
+    const dbPost = await appwriteService.createPost({
+      title,
+      slug,
+      content,
+      featuredImage: "",
+      status: "active",
+      userId: auth.userData.$id || "anonymous", 
+    });
 
     if (dbPost) {
       dispatch(
         addPost({ title, author: author || "Anonymous", excerpt, content })
       );
     }
-    console.log('post', { title, author: author || "Anonymous", excerpt, content })
+    console.log("post", {
+      title,
+      author: author || "Anonymous",
+      excerpt,
+      content,
+    });
 
     setTitle("");
     setAuthor("");
@@ -121,12 +134,15 @@ function PostEditor() {
           onEditorChange={(v) => setContent(v)}
         />
         <div className="flex items-center justify-end">
-          <button
+          {/* <button
             type="submit"
             className="rounded-xl px-4 py-2.5 bg-brand-600 text-white hover:brightness-110"
           >
             Publish
-          </button>
+          </button> */}
+          <Button type="submit" className="w-[100px]">
+            Publish
+          </Button>
         </div>
       </form>
     </Card>
