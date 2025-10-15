@@ -20,9 +20,9 @@ function ProtectedRoute({ children }) {
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-surface to-[#070a10]">
-      <Navbar />
+    <div className="min-h-screen bg-gradient-to-b from-surface to-[#070a10]"> 
       <BrowserRouter>
+       <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
