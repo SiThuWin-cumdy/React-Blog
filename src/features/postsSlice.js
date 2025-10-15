@@ -32,7 +32,7 @@ export const postsSlice = createSlice({
       },
     },
     deletePost(state, action) {
-      return state.items.filter((p) => p.$id !== action.payload);
+      state.items = state.items.filter((p) => p.$id !== action.payload);
     },
   },
 });

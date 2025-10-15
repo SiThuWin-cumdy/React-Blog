@@ -9,12 +9,12 @@ import appwriteService from "../../appwrite/config";
 import { useNavigate } from "react-router-dom";
 
 function AllPost() {
-  const [posts, setPosts] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const allPost = useSelector((state) => state.posts.items);
+  const posts = useSelector((state) => state.posts.items);
 
   useEffect(() => {
+    let mounted = true;
     appwriteService.getPosts().then((posts) => {
       if (posts) {
         const filtered = posts?.documents?.map((doc) => ({
@@ -29,14 +29,12 @@ function AllPost() {
         dispatch(postsAction(filtered));
       }
     });
-  }, []);
+    return () => {
+      mounted = false;
+    };
+  }, [dispatch]);
 
-  useEffect(() => {
-    setPosts(allPost);
-    console.log(allPost);
-  }, [allPost]);
-
-  const PostDelete = (post) => {
+  const handleDelete = (post) => {
     appwriteService.deletePost(post.$id).then((status) => {
       if (status) {
         if (post.featuredImage) {
@@ -53,7 +51,11 @@ function AllPost() {
     <>
       <section className="grid gap-6 md:grid-cols-2">
         {posts?.map((p) => (
-          <PostCard key={p.$id} post={p} onDelete={() => PostDelete(p)} />
+          <PostCard
+            key={p.$id ?? p.id ?? p.slug}
+            post={p}
+            onDelete={() => handleDelete(p)}
+          />
         ))}
       </section>
     </>
