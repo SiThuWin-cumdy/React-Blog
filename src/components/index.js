@@ -5,5 +5,6 @@ import Button from "./Button";
 import LogoutBtn from "./LogoutBtn";
 import PostForm from "./post/PostForm";
 import AllPost from "./post/AllPost";
+import RTE from "./post/RTE";
 
-export { Container, PostCard, Navbar, Button, LogoutBtn, PostForm, AllPost };
+export { Container, PostCard, Navbar, Button, LogoutBtn, PostForm, AllPost ,RTE};

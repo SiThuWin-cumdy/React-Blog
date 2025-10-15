@@ -40,8 +40,6 @@ function AllPost() {
         if (post.featuredImage) {
           appwriteService.deleteFile(post.featuredImage);
         }
-        console.log("deletePostAction type:", typeof deletePostAction); // should be 'function'
-
         dispatch(deletePostAction(post.$id));
         navigate("/");
       }
