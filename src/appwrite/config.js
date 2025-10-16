@@ -1,4 +1,12 @@
-import { Client, Databases, Storage, Permission, Role,Query } from "appwrite";
+import {
+  Client,
+  Databases,
+  Storage,
+  Permission,
+  Role,
+  Query,
+  ID,
+} from "appwrite";
 import conf from "../conf/conf.js";
 
 export class Service {
@@ -13,7 +21,16 @@ export class Service {
     this.bucket = new Storage(this.client);
   }
 
-  async createPost({ title, slug, content, featuredImage, status, userId }) {
+  async createPost({
+    title,
+    slug,
+    content,
+    featuredImage,
+    status,
+    userId,
+    author,
+    excerpt,
+  }) {
     try {
       return await this.databases.createDocument(
         conf.appwriteDatabaseId,
@@ -26,6 +43,8 @@ export class Service {
           featuredImage,
           status,
           userId,
+          author,
+          excerpt,
         },
         [
           Permission.read(Role.any()), // anyone can read
@@ -38,7 +57,10 @@ export class Service {
     }
   }
 
-  async updatePost(slug, { title, content, featuredImage, status }) {
+  async updatePost(
+    slug,
+    { title, content, featuredImage, status, author, excerpt }
+  ) {
     try {
       return await this.databases.updateDocument(
         conf.appwriteDatabaseId,
@@ -49,6 +71,8 @@ export class Service {
           content,
           featuredImage,
           status,
+          author,
+          excerpt,
         }
       );
     } catch (error) {
@@ -107,7 +131,7 @@ export class Service {
       );
     } catch (error) {
       console.log("Appwrite serive :: uploadFile :: error", error);
-      return falseÍ;
+      return false;
     }
   }
 

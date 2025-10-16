@@ -31,11 +31,33 @@ export const postsSlice = createSlice({
         };
       },
     },
+    updatePost: {
+      reducer(state, action) {
+        const { $id, changes } = action.payload; // { $id, changes: { title?, content?, ... } }
+        const idx = state.items.findIndex((p) => p.$id === $id);
+        if (idx !== -1) {
+          state.items[idx] = { ...state.items[idx], ...changes };
+        }
+      },
+      prepare({ $id, title, userId, slug, content, featuredImage, status }) {
+        return {
+          payload: {
+            $id,
+            title,
+            userId,
+            slug,
+            content,
+            featuredImage,
+            status,
+          },
+        };
+      },
+    },
     deletePost(state, action) {
       state.items = state.items.filter((p) => p.$id !== action.payload);
     },
   },
 });
 
-export const { addPost, deletePost, posts } = postsSlice.actions;
+export const { addPost, deletePost, posts ,updatePost } = postsSlice.actions;
 export default postsSlice.reducer;

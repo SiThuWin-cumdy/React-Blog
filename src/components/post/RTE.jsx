@@ -6,6 +6,7 @@ import conf from "../../conf/conf.js";
 function RTE({ name, control, label, defaultValue = "" }) {
   return (
     <>
+      <label className="text-left font-medium text-md">{label}</label>
       <Controller
         name={name || "content"}
         control={control}

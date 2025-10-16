@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar";
-import PostEditor from "./pages/PostEditor";
+import CreatePost from "./pages/CreatePost";
+import EditPost from "./pages/EditPost";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -20,9 +21,9 @@ function ProtectedRoute({ children }) {
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-surface to-[#070a10]"> 
+    <div className="min-h-screen bg-gradient-to-b from-surface to-[#070a10]">
       <BrowserRouter>
-       <Navbar />
+        <Navbar />
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -38,7 +39,15 @@ function App() {
             path="/addpost"
             element={
               <ProtectedRoute>
-                <PostEditor />
+                <CreatePost />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/post/:slug"
+            element={
+              <ProtectedRoute>
+                <EditPost />
               </ProtectedRoute>
             }
           />

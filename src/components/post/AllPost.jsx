@@ -53,6 +53,7 @@ function AllPost() {
             key={p.$id ?? p.id ?? p.slug}
             post={p}
             onDelete={() => handleDelete(p)}
+            onEdit={() => navigate(`/post/${p.slug}`)}
           />
         ))}
       </section>
