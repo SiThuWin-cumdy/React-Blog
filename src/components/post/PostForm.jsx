@@ -33,10 +33,14 @@ function PostForm({ initial }) {
     // e.preventDefault();
     if (!data?.title.trim() || !data?.slug) return;
     if (initial) {
-      if (data?.featuredImage) {
-        const deleteFile = await appwriteService.deletePost(
-          data?.featuredImage
+      if (initial?.featuredImage && data?.image[0]) {
+        const deleteFile = await appwriteService.deleteFile(
+          initial?.featuredImage
         );
+        const file = await appwriteService.uploadFile(data?.image[0]);
+        if (file) {
+          data.featuredImage = file.$id;
+        }
       }
       const dbPost = await appwriteService.updatePost(initial.slug, {
         ...data,
