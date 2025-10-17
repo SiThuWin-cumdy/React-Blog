@@ -6,6 +6,7 @@ import EditPost from "./pages/EditPost";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Post from "./pages/Post";
 import Home from "./pages/Home";
 import { useSelector } from "react-redux";
 
@@ -26,6 +27,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/post/:slug" element={<Post />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} /> 
           <Route
@@ -37,7 +39,7 @@ function App() {
             }
           />
           <Route
-            path="/post/:slug"
+            path="/editpost/:slug"
             element={
               <ProtectedRoute>
                 <EditPost />

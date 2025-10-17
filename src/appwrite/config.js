@@ -145,8 +145,16 @@ export class Service {
     }
   }
 
-  getFilePreview(fileId) {
-    return this.bucket.getFilePreview(conf.appwriteBucketId, fileId);
+  getFilePreview(fileId, options = []) {
+    const u = this.bucket.getFilePreview(
+      conf.appwriteBucketId,
+      fileId,
+      ...options
+    );
+    return typeof u === "string" ? u : u.toString();
+  }
+  getFileview(fileId) {
+    return this.bucket.getFileView(conf.appwriteBucketId, fileId);
   }
 }
 

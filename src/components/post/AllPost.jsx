@@ -6,7 +6,7 @@ import {
   posts as postsAction,
 } from "../../features/postsSlice";
 import appwriteService from "../../appwrite/config";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function AllPost() {
   const navigate = useNavigate();
@@ -50,12 +50,14 @@ function AllPost() {
     <>
       <section className="grid gap-6 md:grid-cols-2">
         {posts?.map((p) => (
-          <PostCard
-            key={p.$id ?? p.id ?? p.slug}
-            post={p}
-            onDelete={() => handleDelete(p)}
-            onEdit={() => navigate(`/post/${p.slug}`)}
-          />
+          <Link to={`/post/${p.slug}`} key={p.$id ?? p.id ?? p.slug}>
+            <PostCard
+              key={p.$id ?? p.id ?? p.slug}
+              post={p}
+              onDelete={() => handleDelete(p)}
+              onEdit={() => navigate(`/editpost/${p.slug}`)}
+            />
+          </Link>
         ))}
       </section>
     </>
