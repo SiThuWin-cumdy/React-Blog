@@ -25,6 +25,7 @@ function AllPost() {
           featuredImage: doc.featuredImage,
           userId: doc.userId,
           content: doc.content,
+          updatedAt: doc.$updatedAt,
         }));
         dispatch(postsAction(filtered));
       }

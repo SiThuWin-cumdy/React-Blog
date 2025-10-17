@@ -17,7 +17,7 @@ export const postsSlice = createSlice({
       reducer(state, action) {
         state.items.unshift(action.payload);
       },
-      prepare({ $id, title, userId, slug, content, featuredImage, status }) {
+      prepare({ $id, title, userId, slug, content, featuredImage, status ,updatedAt }) {
         return {
           payload: {
             $id,
@@ -27,6 +27,7 @@ export const postsSlice = createSlice({
             content,
             featuredImage,
             status,
+            updatedAt
           },
         };
       },
@@ -39,7 +40,7 @@ export const postsSlice = createSlice({
           state.items[idx] = { ...state.items[idx], ...changes };
         }
       },
-      prepare({ $id, title, userId, slug, content, featuredImage, status }) {
+      prepare({ $id, title, userId, slug, content, featuredImage, status,updatedAt }) {
         return {
           payload: {
             $id,
@@ -49,6 +50,7 @@ export const postsSlice = createSlice({
             content,
             featuredImage,
             status,
+            updatedAt
           },
         };
       },

@@ -1,5 +1,5 @@
 import React from "react";
-import { LogoutBtn,Button } from "./index";
+import { LogoutBtn, Button } from "./index";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -28,6 +28,15 @@ function Navbar() {
               </Button>
             </Link>
             <LogoutBtn />
+          </div>
+        )}
+        {!authStatus && (
+          <div className="flex items-center gap-3">
+            <Link to="/login">
+              <Button type="button" className="w-[100px] bg-gray-800">
+                Login
+              </Button>
+            </Link>
           </div>
         )}
       </div>

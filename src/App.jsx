@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+ 
 import "./App.css";
 import Navbar from "./components/Navbar";
 import CreatePost from "./pages/CreatePost";
@@ -25,16 +25,9 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/signup" element={<Signup />} /> 
           <Route
             path="/addpost"
             element={
