@@ -26,6 +26,7 @@ function AllPost() {
           userId: doc.userId,
           content: doc.content,
           updatedAt: doc.$updatedAt,
+          author: doc.author,
         }));
         dispatch(postsAction(filtered));
       }
