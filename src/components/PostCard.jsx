@@ -32,7 +32,7 @@ function PostCard({ post, onDelete, onEdit }) {
               Edit
             </button>
             <button
-              onClick={() => {
+              onClick={(e) => {
                 e.stopPropagation();  
                 e.preventDefault();
                 onDelete(post);
