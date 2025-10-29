@@ -8,7 +8,8 @@ import AllPost from "./post/AllPost";
 import RTE from "./post/RTE";
 import Input from "./Input";
 import PostDetail from "./post/PostDetail";
-import HtmlViewer from "./HtmlViewer";
+import HtmlViewer from "./HtmlViewer"; 
+import TextArea from "./TextArea";
 export {
   Container,
   PostCard,
@@ -21,4 +22,5 @@ export {
   Input,
   PostDetail,
   HtmlViewer,
+  TextArea,
 };

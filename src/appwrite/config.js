@@ -29,7 +29,7 @@ export class Service {
     status,
     userId,
     author,
-    excerpt,
+    desc,
   }) {
     try {
       return await this.databases.createDocument(
@@ -44,7 +44,7 @@ export class Service {
           status,
           userId,
           author,
-          excerpt,
+          desc,
         },
         [
           Permission.read(Role.any()), // anyone can read
@@ -59,7 +59,7 @@ export class Service {
 
   async updatePost(
     slug,
-    { title, content, featuredImage, status, author, excerpt }
+    { title, content, featuredImage, status, author, desc }
   ) {
     try {
       return await this.databases.updateDocument(
@@ -72,7 +72,7 @@ export class Service {
           featuredImage,
           status,
           author,
-          excerpt,
+          desc,
         }
       );
     } catch (error) {

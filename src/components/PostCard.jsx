@@ -44,11 +44,7 @@ function PostCard({ post, onDelete, onEdit }) {
           </div>
         )}
       </div>
-      <p className="mt-4 text-ink/90">{post.excerpt}</p>
-      <div
-        className="prose prose-invert max-w-none mt-4"
-        dangerouslySetInnerHTML={{ __html: post.content }}
-      />
+      <p className="mt-4 text-ink/90">{post.desc}</p> 
     </Container>
   );
 }

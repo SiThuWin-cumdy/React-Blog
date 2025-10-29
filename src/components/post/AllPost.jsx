@@ -24,6 +24,7 @@ function AllPost() {
           slug: doc.slug,
           featuredImage: doc.featuredImage,
           userId: doc.userId,
+          desc: doc.desc,
           content: doc.content,
           updatedAt: doc.$updatedAt,
           author: doc.author,

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost, updatePost } from "../../features/postsSlice.js";
-import { Button, RTE, Input } from "../index.js";
+import { Button, RTE, Input ,TextArea } from "../index.js";
 import conf from "../../conf/conf.js";
 import appwriteService from "../../appwrite/config.js";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +20,7 @@ function PostForm({ initial }) {
     defaultValues: {
       title: initial?.title ?? "",
       author: initial?.author ?? "",
-      excerpt: initial?.excerpt ?? "",
+      desc: initial?.desc ?? "",
       slug: initial?.slug ?? "",
       featuredImage: initial?.featuredImage ?? "",
       content: initial?.content ?? "<p>Write something awesome…</p>",
@@ -104,7 +104,7 @@ function PostForm({ initial }) {
             })}
           />
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1   gap-4">
           <Input
             label="Author :"
             type="text"
@@ -113,13 +113,13 @@ function PostForm({ initial }) {
               required: "Author is required",
             })}
           />
-
-          <Input
-            label="Excerpt :"
-            type="text"
+        </div>
+        <div className="grid grid-cols-1   gap-4">
+          <TextArea
+            label="Description :" 
             className=""
-            {...register("excerpt", {
-              required: "Excerpt is required",
+            {...register("desc", {
+              required: "Description is required",
             })}
           />
         </div>
