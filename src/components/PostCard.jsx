@@ -3,7 +3,7 @@ import Container from "./Container";
 import { useSelector } from "react-redux";
 
 function PostCard({ post, onDelete, onEdit }) {
-  const auth = useSelector((state) => state.auth);
+  const auth = useSelector((state) => state.auth); 
   // if (!auth.userData) {
   //   return <Navigate to="/login" />;
   // }
@@ -19,7 +19,7 @@ function PostCard({ post, onDelete, onEdit }) {
           </p>
         </div>
 
-        {auth.userData && (
+        {auth.userData  && auth?.userData?.$id == post?.userId && (
           <div className="flex gap-2">
             <button
               onClick={(e) => {
